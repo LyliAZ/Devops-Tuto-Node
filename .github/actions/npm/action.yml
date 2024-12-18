@@ -14,5 +14,5 @@ runs:
       uses: actions/setup-node@v4
       with:
         node-version: '16.x'
-    - run: npm set registery="//${{ inputs.npm_repo}}/:_authToken=${{ inputs.secret }}"
+    - run: npm set registery="/${{ inputs.npm_repo}}/:_authToken=${{ inputs.secret }}"
     - run: npm publish
