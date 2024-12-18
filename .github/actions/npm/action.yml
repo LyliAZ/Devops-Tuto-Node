@@ -5,7 +5,7 @@ inputs:
   npm_repo:
     required: true
   secret:
-    description: 'artifatory secret'
+    description: 'artifatory npm secret'
     required: true
   actor:
     description: 'artifatory username'
@@ -14,7 +14,7 @@ runs:
   using: "composite"
   steps:
     - name: Log in to the npm registry
-      run: npm set "//${{ inputs.npm_repo}}/:${{ inputs.secret }}""
+      run: npm set "//${{ inputs.npm_repo}}/:_authToken=${{ inputs.secret }}"
     - uses: actions/setup-node@v2
       with:
         context: .
