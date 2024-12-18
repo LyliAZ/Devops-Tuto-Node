@@ -1,0 +1,24 @@
+name: 'npm'
+description: 'An action to create an npm package and push it to artifactory'
+
+inputs:
+  npm_repo:
+    required: true
+  secret:
+    description: 'artifatory secret'
+    required: true
+  actor:
+    description: 'artifatory username'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Log in to the npm registry
+      run: npm set "//${{ inputs.npm_repo}}/:${{ inputs.secret }}""
+    - uses: actions/setup-node@v2
+      with:
+        context: .
+        push: true
+        tags: 
+          ${{ inputs.npm_repo }}/tuto_npm_lylia:latest, 
+          ${{ inputs.npm_repo }}/tuto_npm_lylia:${{ github.ref_name }}
