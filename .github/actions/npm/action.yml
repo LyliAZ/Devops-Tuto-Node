@@ -16,5 +16,5 @@ runs:
         node-version: '16.x'
         token: '${{ inputs.secret }}'
         registry-url: '${{ inputs.npm_repo}}'
-    # - run: npm set registery="//${{ inputs.npm_repo}}/:_authToken=${{ inputs.secret }}"
-    # - run: npm publish
+    - run: npm set registery="//${{ inputs.npm_repo}}/:_authToken=${{ inputs.secret }}"
+    - run: npm publish
