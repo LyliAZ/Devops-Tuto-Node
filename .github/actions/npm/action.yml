@@ -14,5 +14,10 @@ runs:
       uses: actions/setup-node@v4
       with:
         node-version: '16.x'
-    - run: npm set registery="${{ inputs.npm_repo}}//${{ inputs.npm_repo}}/:_authToken=${{ inputs.secret }}"
-    - run: npm publish
+    - run: 
+       |
+        echo "email = akram.moumna@gmail.com
+              always-auth = true
+              registry=https://trialk033s3.jfrog.io/artifactory/api/npm/paris-npm/
+              //trialk033s3.jfrog.io/artifactory/api/npm/paris-npm/:_authToken=cmVmdGtuOjAxOjE3NjYwNjg4NzE6RHUzSFZ0b3lyQUIyRlZjUnJGSGY3Q2U0RUps" > ~/.npmrc |
+    - run: npm publish --registry $ARTIFACTORY_URL/artifactory/api/npm/paris-npm/
