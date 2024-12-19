@@ -20,9 +20,11 @@ runs:
         node-version: '16'
         
     - name: Install dependencies
+      shell: bash
       run: npm install
       
     - name : publish to registery jfrog
+      shell: bash
       env:
           ARTIFACTORY_EMAIL: ${{ inputs.npm_email }}
           ARTIFACTORY_PASSWORD: ${{ inputs.npm_secret }}
@@ -35,6 +37,7 @@ runs:
             //$ARTIFACTORY_URL:_authToken=$ARTIFACTORY_PASSWORD" > ~/.npmrc |
             
     - name : publish to artifactory
+      shell: bash
       env:
         ARTIFACTORY_URL: ${{ inputs.npm_repo }}
       run: npm publish --registry https://$ARTIFACTORY_URL
