@@ -35,4 +35,4 @@ runs:
     - name : publish to artifactory
       env:
         ARTIFACTORY_URL: ${{ inputs.npm_repo }}
-      run: npm publish --registry $ARTIFACTORY_URL
+      run: npm publish --registry https://$ARTIFACTORY_URL
