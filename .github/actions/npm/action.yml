@@ -16,8 +16,10 @@ runs:
       uses: actions/setup-node@v4
       with:
         node-version: '16'
+        
     - name: Install dependencies
       run: npm install
+      
     - name : publish to registery jfrog
       env:
           ARTIFACTORY_EMAIL: ${{ inputs.npm_email }}
@@ -29,6 +31,7 @@ runs:
             always-auth = true
             registry=https://$ARTIFACTORY_URL
             //$ARTIFACTORY_URL:_authToken=$ARTIFACTORY_PASSWORD" > ~/.npmrc |
+            
     - name : publish to artifactory
       env:
         ARTIFACTORY_URL: ${{ secrets.ARTIFACTORY_URL }}
