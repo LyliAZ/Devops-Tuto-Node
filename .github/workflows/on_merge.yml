@@ -10,6 +10,6 @@ jobs:
       - uses:  actions/checkout@v2
       - uses: ./.github/actions/npm
         with:
-          docker_repo: https://trialk033s3.jfrog.io/artifactory/api/npm/paris-npm/
-          actor: lylia
-          secret: ${{ secrets.JFROG_NPM_TOKEN }}
+          npm_repo: trialk033s3.jfrog.io/artifactory/api/npm/paris-npm/
+          npm_email: lylia.ait.zerrouk@gmail.com
+          npm_secret: ${{ secrets.JFROG_NPM_TOKEN }}
