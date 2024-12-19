@@ -14,16 +14,29 @@ runs:
     - name: Checkout code
       uses: actions/checkout@v3
       
-    - name: Log in to the npm registry
+    - name: setup npm
       uses: actions/setup-node@v3
       with:
         node-version: '16'
+
+    - name: Cache node modules
+        id: cache-npm
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: %LocalAppData%/npm-cache
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
         
     - name: Install dependencies
       shell: bash
       run: npm install
       
-    - name: publish to registery jfrog
+    - name: log into the npm registery
       env:
         ARTIFACTORY_EMAIL: ${{ inputs.npm_email }}
         ARTIFACTORY_PASSWORD: ${{ inputs.npm_secret }}
