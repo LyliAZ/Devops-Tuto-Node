@@ -35,4 +35,4 @@ runs:
     - name : publish to artifactory
       env:
         ARTIFACTORY_URL: ${{ input.npm_repo }}
-      run: npm publish --registry https://$ARTIFACTORY_URL/artifactory/api/npm/paris-npm/
+      run: npm publish --registry https://$ARTIFACTORY_URL
