@@ -1,5 +1,5 @@
-name: 'npm'
-description: 'An action to create an npm package and push it to artifactory'
+name: npm
+description: An action to create an npm package and push it to artifactory
 
 inputs:
   npm_repo:
@@ -7,7 +7,6 @@ inputs:
   npm_email:
     required: true
   npm_secret:
-    description: 'artifatory npm secret'
     required: true
 runs:
   using: "composite"
