@@ -15,7 +15,7 @@ runs:
     - name: Log in to the npm registry
       uses: actions/setup-node@v4
       with:
-        node-version: '16.x'
+        node-version: '16'
     - name: Install dependencies
       run: npm install
     - name : publish to registery jfrog
