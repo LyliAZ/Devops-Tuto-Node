@@ -4,7 +4,9 @@ description: 'An action to create an npm package and push it to artifactory'
 inputs:
   npm_repo:
     required: true
-  secret:
+  npm_email:
+    required: true
+  npm_secret:
     description: 'artifatory npm secret'
     required: true
 runs:
@@ -17,10 +19,17 @@ runs:
     - name: Install dependencies
       run: npm install
     - name : publish to registery jfrog
-    - run: 
-       |
-        echo "email = lylia.ait.zerrouk@gmail.com
-              always-auth = true
-              registry=https://trialk033s3.jfrog.io/artifactory/api/npm/paris-npm/
-              //trialk033s3.jfrog.io/artifactory/api/npm/paris-npm/:_authToken=${{ inputs.secret }}" > ~/.npmrc |
-    - run: npm publish --registry $ARTIFACTORY_URL/artifactory/api/npm/paris-npm/
+      env:
+          ARTIFACTORY_EMAIL: ${{ inputs.npm_email }}
+          ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
+          ARTIFACTORY_URL: ${{ secrets.ARTIFACTORY_URL }}
+      run: 
+        |
+          echo "email = $ARTIFACTORY_EMAIL
+            always-auth = true
+            registry=https://$ARTIFACTORY_URL
+            //$ARTIFACTORY_URL:_authToken=$ARTIFACTORY_PASSWORD" > ~/.npmrc |
+    - name : publish to artifactory
+      env:
+        ARTIFACTORY_URL: ${{ secrets.ARTIFACTORY_URL }}
+      run: npm publish --registry https://$ARTIFACTORY_URL/artifactory/api/npm/paris-npm/
