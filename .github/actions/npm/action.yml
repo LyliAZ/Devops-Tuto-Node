@@ -22,19 +22,19 @@ runs:
     - name: Install dependencies
       run: npm install
       
-    - name : publish to registery jfrog
+    - name: publish to registery jfrog
       env:
           ARTIFACTORY_EMAIL: ${{ inputs.npm_email }}
           ARTIFACTORY_PASSWORD: ${{ inputs.npm_secret }}
           ARTIFACTORY_URL: ${{ inputs.npm_repo }}
       run: 
         |
-          echo "email = $ARTIFACTORY_EMAIL
+        echo "email = $ARTIFACTORY_EMAIL
             always-auth = true
             registry=https://$ARTIFACTORY_URL
             //$ARTIFACTORY_URL:_authToken=$ARTIFACTORY_PASSWORD" > ~/.npmrc |
             
-    - name : publish to artifactory
+    - name: publish to artifactory
       env:
         ARTIFACTORY_URL: ${{ inputs.npm_repo }}
       run: npm publish --registry https://$ARTIFACTORY_URL
