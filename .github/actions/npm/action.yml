@@ -24,15 +24,15 @@ runs:
       
     - name: publish to registery jfrog
       env:
-          ARTIFACTORY_EMAIL: ${{ inputs.npm_email }}
-          ARTIFACTORY_PASSWORD: ${{ inputs.npm_secret }}
-          ARTIFACTORY_URL: ${{ inputs.npm_repo }}
+        ARTIFACTORY_EMAIL: ${{ inputs.npm_email }}
+        ARTIFACTORY_PASSWORD: ${{ inputs.npm_secret }}
+        ARTIFACTORY_URL: ${{ inputs.npm_repo }}
       run: 
         |
         echo "email = $ARTIFACTORY_EMAIL
-            always-auth = true
-            registry=https://$ARTIFACTORY_URL
-            //$ARTIFACTORY_URL:_authToken=$ARTIFACTORY_PASSWORD" > ~/.npmrc 
+              always-auth = true
+              registry=https://$ARTIFACTORY_URL
+              //$ARTIFACTORY_URL:_authToken=$ARTIFACTORY_PASSWORD" > ~/.npmrc 
             
     - name: publish to artifactory
       env:
