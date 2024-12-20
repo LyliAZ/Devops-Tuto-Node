@@ -61,7 +61,7 @@ jobs:
       - name: use jfrog cli
         run: |
           # check version
-          run: jf --version
+          jf --version
           # Ping the server
           jf rt ping
           # Collect environment variables for the build
