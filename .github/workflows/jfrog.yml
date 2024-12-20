@@ -65,7 +65,7 @@ jobs:
           # Ping the server
           jf rt ping
           # set config file
-          jf npm config set registry https://$JF_URL/artifactory/api/npm/paris-npm/
+          jf npm-config set registry https://$JF_URL/artifactory/api/npm/paris-npm/
           # Collect environment variables for the build
           jf rt bce
           # Collect VCS details from git and add them to the build
