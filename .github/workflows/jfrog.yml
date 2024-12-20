@@ -71,7 +71,6 @@ jobs:
           # Publish build info
           jf rt bp
 
-      
       # - name: Configure artifactory
       #   env:
       #     ARTIFACTORY_USEREMAIL: ${{ secrets.ARTIFACTORY_USEREMAIL }}
