@@ -13,14 +13,14 @@ jobs:
         uses: jfrog/setup-jfrog-cli@v4
         env:
           # JFrog Platform url
-          JF_URL: ${{ vars.JF_URL }} # or 'https://acme.jfrog.io'
+          JF_URL: ${{ vars.JF_URL }}
           # Basic authentication credentials
           JF_USER: ${{ secrets.JF_USER }}
           JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
           
-      # - name: check jfrog 
-      #   run: |
-      #     jf rt ping
+      - name: check jfrog 
+        run: |
+          jf rt ping $JF_URL
 
       - name : jfrog check version
         run: jf --version
