@@ -10,7 +10,7 @@ jobs:
       # Required for uploading code scanning.
       security-events: write
     env:
-      SONAR_REPORT_TASK_FILE: ./.scannerwork/report-task_lylia.txt
+      SONAR_REPORT_TASK_FILE: ./.scannerwork/report-task.txt
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
