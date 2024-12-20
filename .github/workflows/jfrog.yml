@@ -71,26 +71,22 @@ jobs:
           # Publish build info
           jf rt bp
 
-      # - uses: actions/checkout@v3
-      # - name: Collect SonarQube Info
-      #   run: 
-
-      # - name: Configure artifactory
-      #   env:
-      #     ARTIFACTORY_USEREMAIL: ${{ secrets.ARTIFACTORY_USEREMAIL }}
-      #     ARTIFACTORY_PASSWORD: ${{ secrets.JFROG_NPM_TOKEN }}
-      #     ARTIFACTORY_URL: ${{ secrets.ARTIFACTORY_URL }}
-      #   run:
-      #     |
-      #     echo "email = $ARTIFACTORY_USEREMAIL
-      #           always-auth = true
-      #           registry=https://$ARTIFACTORY_URL/artifactory/api/npm/paris-npm/
-      #           //$ARTIFACTORY_URL/artifactory/api/npm/paris-npm/:_authToken=$ARTIFACTORY_PASSWORD" > ~/.npmrc
+      - name: Configure artifactory
+        env:
+          ARTIFACTORY_USEREMAIL: ${{ secrets.ARTIFACTORY_USEREMAIL }}
+          ARTIFACTORY_PASSWORD: ${{ secrets.JFROG_NPM_TOKEN }}
+          ARTIFACTORY_URL: ${{ secrets.ARTIFACTORY_URL }}
+        run:
+          |
+          echo "email = $ARTIFACTORY_USEREMAIL
+                always-auth = true
+                registry=https://$ARTIFACTORY_URL/artifactory/api/npm/paris-npm/
+                //$ARTIFACTORY_URL/artifactory/api/npm/paris-npm/:_authToken=$ARTIFACTORY_PASSWORD" > ~/.npmrc
 
 
-      # - name: Push to artifactory
-      #   env:
-      #     ARTIFACTORY_URL: ${{ secrets.ARTIFACTORY_URL }}
-      #   run: npm publish --registry https://$ARTIFACTORY_URL/artifactory/api/npm/paris-npm/     
+      - name: Push to artifactory
+        env:
+          ARTIFACTORY_URL: ${{ secrets.ARTIFACTORY_URL }}
+        run: jf npm publish --registry https://$ARTIFACTORY_URL/artifactory/api/npm/paris-npm/     
 
       
