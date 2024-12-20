@@ -18,9 +18,9 @@ jobs:
           JF_USER: ${{ secrets.JF_USER }}
           JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
           
-      - name: check jfrog 
-        run: |
-          jf rt ping
+      # - name: check jfrog 
+      #   run: |
+      #     jf rt ping
 
       - name : jfrog check version
         run: jf --version
