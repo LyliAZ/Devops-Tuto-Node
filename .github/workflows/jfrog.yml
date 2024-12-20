@@ -64,32 +64,13 @@ jobs:
           jf --version
           # Ping the server
           jf rt ping
+          # set config file
+          jf npm config set registry https://$JF_URL/artifactory/api/npm/paris-npm/
           # Collect environment variables for the build
           jf rt bce
           # Collect VCS details from git and add them to the build
           jf rt bag
           # Publish build info
           jf rt bp
-
-      - name: Configure artifactory
-        env:
-          ARTIFACTORY_USEREMAIL: ${{ secrets.ARTIFACTORY_USEREMAIL }}
-          ARTIFACTORY_PASSWORD: ${{ secrets.JFROG_NPM_TOKEN }}
-          ARTIFACTORY_URL: ${{ secrets.ARTIFACTORY_URL }}
-        run:
-          |
-          echo "email = $ARTIFACTORY_USEREMAIL
-                always-auth = true
-                registry=https://$ARTIFACTORY_URL/artifactory/api/npm/paris-npm/
-                //$ARTIFACTORY_URL/artifactory/api/npm/paris-npm/:_authToken=$ARTIFACTORY_PASSWORD" > ~/.npmrc
-
-
-      - name: Push to artifactory
-        env:
-          ARTIFACTORY_URL: ${{ secrets.ARTIFACTORY_URL }}
-        run: 
-          |
-          jf npm config set registry https://$ARTIFACTORY_URL/artifactory/api/npm/paris-npm/  
+          # publish package
           jf npm publish    
-
-      
