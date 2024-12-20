@@ -17,11 +17,13 @@ jobs:
           # Basic authentication credentials
           JF_USER: ${{ secrets.JF_USER }}
           JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
-      - run: |
+          
+      - name: check jfrog 
+        run: |
           jf rt ping
 
       - name : jfrog check version
-      - run: jf --version
+        run: jf --version
 
       # - name: Set up nodejs
       #   uses: actions/setup-node@v3
