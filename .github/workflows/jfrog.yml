@@ -9,6 +9,8 @@ jobs:
       contents: read
       # Required for uploading code scanning.
       security-events: write
+    env:
+      SONAR_REPORT_TASK_FILE: ./.scannerwork/report-task.txt
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -64,13 +66,11 @@ jobs:
           jf --version
           # Ping the server
           jf rt ping
-          # set config file
-          jf npm-config --global set registry https://$JF_URL/artifactory/api/npm/paris-npm/
+          # get sonar report
+          jf rt u ${SONAR_REPORT_TASK_FILE} paris-npm 
           # Collect environment variables for the build
           jf rt bce
           # Collect VCS details from git and add them to the build
           jf rt bag
           # Publish build info
-          jf rt bp
-          # publish package
-          jf npm publish    
+          jf rt bp 
