@@ -87,6 +87,9 @@ jobs:
       - name: Push to artifactory
         env:
           ARTIFACTORY_URL: ${{ secrets.ARTIFACTORY_URL }}
-        run: jf npm publish --registry https://$ARTIFACTORY_URL/artifactory/api/npm/paris-npm/     
+        run: 
+          |
+          jf npm config set registry https://$ARTIFACTORY_URL/artifactory/api/npm/paris-npm/  
+          jf npm publish    
 
       
