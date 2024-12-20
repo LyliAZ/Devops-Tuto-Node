@@ -10,6 +10,9 @@ jobs:
       # Required for uploading code scanning.
       security-events: write
     env:
+      # to set a different build name than the default one
+      JFROG_CLI_BUILD_NAME: Devops-Tuto-Node-build
+      # default location for sonar report
       SONAR_REPORT_TASK_FILE: ./.scannerwork/report-task.txt
     runs-on: ubuntu-latest
     steps:
@@ -59,15 +62,22 @@ jobs:
           JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
           # github token
           JF_GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+
+      - name: Collect SonarQube report infos
+        run: |
+          # create a env varibale in github that collects the task id from the scan file
+          echo "SONAR_CE_TASK_ID=$(awk -F '=' '/^ceTaskId/ { print $2 }' ${SONAR_REPORT_TASK_FILE})" >> $GITHUB_ENV
+          # create a env varibale in github that collects the task url from the scan file
+          echo "SONAR_CE_TASK_URL=$(awk -F '=' '/^ceTaskUrl/ { print $2 }' ${SONAR_REPORT_TASK_FILE})" >> $GITHUB_ENV  
           
-      - name: use jfrog cli
+      - name: use jfrog cli (send all data and env variables to artifactory to be used for later)
         run: |
           # check version
           jf --version
           # Ping the server
           jf rt ping
-          # get sonar report
-          jf rt u ${SONAR_REPORT_TASK_FILE} paris-npm 
+          # get sonar report inisde the artifactory 
+          # jf rt u ${SONAR_REPORT_TASK_FILE} paris-npm 
           # Collect environment variables for the build
           jf rt bce
           # Collect VCS details from git and add them to the build
