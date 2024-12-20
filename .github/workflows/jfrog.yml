@@ -71,9 +71,9 @@ jobs:
           # Publish build info
           jf rt bp
 
-      - uses: actions/checkout@v3
-      - name: Collect SonarQube Info
-        run: https://github.com/jfrog/jfrog-integrations/blob/master/sonarqube/artifactory/artifactory-sonar.sh
+      # - uses: actions/checkout@v3
+      # - name: Collect SonarQube Info
+      #   run: 
 
       # - name: Configure artifactory
       #   env:
